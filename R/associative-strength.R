@@ -1,11 +1,8 @@
-associative_strength <- function(x, rescale = NULL) {
-  if (is.data.frame(x)) {
-    df <- x
-    x <- lapply(split(df, x$cue), df_to_vec)
-    if (!is.null(rescale) && rescale == "ppmi") {
-      rsum <- vapply(split(df$R123.Strength, df$response), sum, numeric(1))
-      x <- lapply(x, ppmi, N = length(x), rsum = rsum)
-    }
+associative_strength <- function(df, to_ppmi = FALSE) {
+  if (to_ppmi) {
+    x <- positive_pointwise_mutual_information(df)
+  } else {
+    x <- lapply(split(df, df$cue), df_to_vec)
   }
   cues <- names(x)
   ix_pairs <- combn(length(cues), 2)
