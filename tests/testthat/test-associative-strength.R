@@ -34,5 +34,5 @@ test_that("identical response sets return one strength (data frame, ppmi)", {
     expand.grid(cue = c("c", "d"), response = c("x", "y", "z"))
   )
   x$R123.Strength <- c(.2, .2, .3, .3, .5, .5, .2, .2, .3, .3, .5, .5)
-  expect_equal(associative_strength(x, rescale = "ppmi"), c(1, 1, 1))
+  expect_equal(associative_strength(x, to_ppmi = TRUE), c(1,0,0,0,0,1))
 })
